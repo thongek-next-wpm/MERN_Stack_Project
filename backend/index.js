@@ -1,14 +1,21 @@
 const express = require("express"); // Import the Express library
 require("dotenv").config(); // Load environment variables from .env file
+const wokoutRoutes = require("./routers/workouts"); // Import workout routes
 
 // Create an Express application
 const app = express();
 
-// Middleware to parse JSON requests
+// Middleware to parse JSON
+app.use(express.json());
+
+// Middleware to log requests
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
 });
+
+// Use workout routes for any requests to /api/workouts
+app.use("/api/workouts", wokoutRoutes);
 
 // Define a route for the root URL
 app.get("/", (req, res) => {
