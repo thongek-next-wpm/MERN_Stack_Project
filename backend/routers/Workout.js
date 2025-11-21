@@ -20,10 +20,10 @@ router.post("/", async (req, res) => {
     const workout = await Workout.create({ title, reps, load });
     workout.save();
     res.status(200).json(workout);
+    res.json({ message: "Create a new workout" });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
-  res.json({ message: "Create a new workout" });
 });
 
 // Delete a workout by ID
